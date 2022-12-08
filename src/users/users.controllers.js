@@ -29,6 +29,15 @@ const createUser = async (obj) => {
     return data
 }
 
+const findUserByEmail = async (email) => {
+    const data = await Users.findOne({
+        where: {
+            email: email
+        }
+    })
+    return data
+}
+
 const updateUser = async (id, obj) => {
     const data = await Users.update(obj, {
         where: {
@@ -47,10 +56,12 @@ const deleteUser = async (id) => {
     return data //? Retorna 1 en caso de que se haya eliminado, o 0 en caso de que el id no exista
 }
 
+
 module.exports = {
     findAllUsers,
     findUserById,
     createUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    findUserByEmail
 }
