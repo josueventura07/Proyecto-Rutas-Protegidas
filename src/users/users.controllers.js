@@ -1,5 +1,6 @@
 const Users = require('../models/users.models')
 const uuid = require('uuid')
+const { hashPassword } = require('../utils/crypto')
 
 const findAllUsers = async () => {
     const data = await Users.findAll()
@@ -22,7 +23,7 @@ const createUser = async (obj) => {
         last_name: obj.last_name,
         user_name: obj.user_name,
         email: obj.email,
-        password: obj.password,
+        password: hashPassword(obj.password),
         age: obj.age,
         country: obj.country
     })
@@ -46,6 +47,8 @@ const updateUser = async (id, obj) => {
     })
     return data[0] //? Retorna un arreglo, este arreglo puede lucir de estas 2 maneras [1], [0]
 }
+
+
 
 const deleteUser = async (id) => {
     const data = await Users.destroy({
