@@ -3,7 +3,7 @@ const passportJWT = require('../middleware/auth.middleware')
 
 const userServices = require('./users.services')
 
-router.get("/", passportJWT.authenticate('jwt', {session: false}), userServices.getAllUsers) //? /api/v1/users
+router.get("/", userServices.getAllUsers) //? /api/v1/users
 router.post("/", userServices.postUser) //? /api/v1/users
 
 router.get("/me", passportJWT.authenticate('jwt', {session: false}), userServices.getMyUser)
